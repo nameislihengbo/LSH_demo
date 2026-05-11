@@ -22,7 +22,6 @@ env:
 
 permissions:
   contents: write
-  repositories: write
 
 jobs:
   create-repos:
