@@ -21,7 +21,7 @@
     "license": "CC-BY-4.0",
     "upload_type": "publication",
     "publication_type": "preprint",
-    "version": "v8.0",
+    "version": "v1.0.0",
     "subjects": [
         {
             "term": "Natural Language Processing",
