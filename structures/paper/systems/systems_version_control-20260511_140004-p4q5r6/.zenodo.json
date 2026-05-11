@@ -1,6 +1,6 @@
 {
     "title": "LSH Version Control: Ternary Semantic Versioning Based on Three-Layer Architecture",
-    "description": "We present LSH Version Control, a ternary semantic versioning system grounded in the LSH three-layer architecture (Structure·Rule·Execution). The core insight is that version carry rules should mirror architectural layers: each version digit cycles through three states (0→1→2) before carrying to the next digit, implementing a base-3 carry rule. We systematically compare carry bases from 2 to 10 and demonstrate that base-3 is optimal for the execution layer through three criteria: architectural consistency, fractal self-similarity, and discipline enforcement.",
+    "description": "We present LSH Version Control, a ternary semantic versioning system grounded in the LSH three-layer architecture (Structure-Rule-Execution). The core insight is that version carry rules should mirror architectural layers: each version digit cycles through three states (0->1->2) before carrying to the next digit, implementing a base-3 carry rule. We systematically compare carry bases from 2 to 10 and demonstrate that base-3 is optimal for the execution layer through three criteria: architectural consistency, fractal self-similarity, and discipline enforcement.",
     "creators": [
         {
             "name": "Li, Hengbo",
