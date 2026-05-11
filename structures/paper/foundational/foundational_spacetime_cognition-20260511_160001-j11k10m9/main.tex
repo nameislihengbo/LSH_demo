@@ -1,0 +1,525 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{natbib}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, shapes.geometric, fit, calc, decorations.pathreplacing, patterns}
+
+\geometry{margin=1in}
+
+\title{The Spacetime Cognition Deficit: Why Architecture Matters for General Embodied Intelligence}
+
+\author{Hengbo Li\\
+\texttt{1147502779@qq.com}
+}
+
+\date{May 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We propose the \textit{spacetime cognition deficit} hypothesis: conventional Transformer architectures are structurally limited in achieving general embodied intelligence because they lack intrinsic spacetime modeling capability, and this limitation is architectural rather than parametric --- it cannot be remedied by scaling alone. Drawing on Winner's~\citep{winner1980} insight that artifacts embody political choices and Clark's~\citep{clark1997} embodied cognition thesis, we argue that architectural choices carry philosophical implications that shape not only performance but the kinds of understanding a system can achieve. We present three lines of evidence from the LSH-SFA~\citep{lsh-sfa} series: (1) LSH-SFA achieves comparable accuracy with 14\% fewer parameters and 39\% lower perplexity than Transformer baselines, with more layers yielding worse results in some settings; (2) the wave packet representation embodies the principle that finite codes must approximate an infinite world, formalized through the ``peanut problem''; (3) the collapse phenomenon and AI landscape homogenization parallel ecological monoculture fragility, arguing for architectural diversity. Crucially, we outline a concrete validation path using the LSH project's existing 3D world engine with pluggable physics backends (LSH SimplePhysics, Rapier, Jolt), path planning, and collision simulation modules, proposing three experiments --- physical state prediction, path planning reasoning, and collision prediction --- that can definitively test the spacetime cognition deficit hypothesis. This paper aims to establish the spacetime cognition deficit as the foundational question for embodied intelligence and position LSH-SFA as its architectural foundation: \textit{can an architecture that cannot represent spacetime ever achieve genuine physical understanding?}
+\end{abstract}
+
+\section{Introduction}
+
+\subsection{The Foundational Question}
+
+The LSH-SFA series of papers~\citep{lsh-sfa, lsh-three-layer, lsh-attention, lsh-encoding-gradient, lsh-autoregressive, lsh-format, lsh-burn, lsh-rules, lsh-version-control} presents a complete technical stack: from wave packet representations and PDE-driven field evolution to Rust implementation and self-verifying rule systems. Each paper makes specific, testable claims supported by experimental evidence.
+
+This paper raises the foundational question that emerges from these results: \textit{can an architecture that cannot represent spacetime ever achieve genuine physical understanding?}
+
+We do not claim that ``architecture is ethics.'' Instead, we follow Winner~\citep{winner1980}, who demonstrated that technical artifacts can embody political and philosophical choices, and extend this insight to neural architectures. An architecture that cannot model spacetime is not merely less efficient; it is \textit{different in kind} from one that can. This difference has implications for what the system can understand, not just how well it performs.
+
+\subsection{Scope and Positioning}
+
+This paper establishes the \textbf{spacetime cognition deficit} as a testable hypothesis and argues that LSH-SFA constitutes a \textit{foundation for embodied intelligence} --- an architecture whose physical priors (wave packet spacetime encoding, PDE-driven evolution, light-cone causality, energy conservation) provide the representational substrate that embodied intelligence requires. It synthesizes evidence from the LSH-SFA series, connects it to philosophical foundations, and --- most importantly --- proposes concrete experiments using existing infrastructure to validate or refute the hypothesis.
+
+We focus on three implications where the evidence chain is strongest:
+
+\begin{enumerate}
+\item The spacetime cognition deficit as an architectural (not parametric) limitation
+\item Approximation as the fundamental problem of intelligence
+\item Architectural diversity as a prerequisite for AI ecological health
+\end{enumerate}
+
+Each implication is grounded in specific experimental results from the companion papers, and each points toward a concrete validation path.
+
+\section{Implication 1: The Spacetime Cognition Deficit}
+
+\subsection{The Claim}
+
+Conventional Transformer architectures may be structurally limited in achieving general embodied intelligence because they lack intrinsic spacetime modeling capability. This is an \textit{architectural} constraint, not a parametric one that can be remedied by scaling alone.
+
+\subsection{Evidence from the LSH-SFA Series}
+
+The companion papers provide three lines of evidence:
+
+\textbf{Evidence 1: Parameter efficiency.} On AG News text classification, a 2-layer LSH-SFA with 1.02M parameters achieves 91.80\% accuracy, matching a 4-layer Transformer with $\sim$1.19M parameters~\citep{lsh-sfa}. The 14\% parameter reduction suggests that intrinsic spacetime encoding provides structural advantages that Transformer must compensate for with additional layers.
+
+\textbf{Evidence 2: Language modeling.} On WikiText-2, LSH-SFA achieves perplexity 654 vs.\ Transformer's 1069 (39\% improvement) with no overfitting observed~\citep{lsh-sfa}. The absence of overfitting is consistent with the hypothesis that physical priors act as a natural regularizer.
+
+\textbf{Evidence 3: Diminishing returns.} In a controlled experiment on digit prediction, a 4-layer model achieves 37.5\% accuracy while an 8-layer model achieves only 31.2\%~\citep{lsh-encoding-gradient}. This inversion --- more layers yielding worse results --- is consistent with an architectural ceiling rather than a data limitation.
+
+\subsection{Why Position Encoding Is Not Enough}
+
+In Transformer, position information is added to token embeddings:
+
+\begin{equation}
+\mathbf{e}_i = \mathbf{x}_i + \mathbf{p}_i
+\end{equation}
+
+This approach has three structural limitations:
+
+\begin{enumerate}
+\item \textbf{Spatial}: Only encodes 1D linear sequence position, not physical space
+\item \textbf{Temporal}: No time modeling --- sequence position $\neq$ physical time
+\item \textbf{Causal}: Causality enforced by attention masks, not intrinsic to the architecture
+\end{enumerate}
+
+While improvements like RoPE~\citep{su2024roformer} and ALiBi~\citep{press2022train} partially address extrapolation, they remain 1D positional schemes. They do not encode physical spacetime; they encode sequence position. The gap between sequence position and physical spacetime is the spacetime cognition deficit.
+
+In contrast, LSH-SFA's wave packet representation encodes spacetime intrinsically:
+
+\begin{table}[h]
+\centering
+\caption{Transformer vs.\ LSH-SFA: Spacetime modeling comparison.}
+\label{tab:spacetime}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Property} & \textbf{Transformer} & \textbf{LSH-SFA} \\
+\midrule
+Spatial encoding & Appended (sin/cos/RoPE) & Intrinsic (wave vector $k$) \\
+Temporal dynamics & None & Intrinsic (angular frequency $\omega$) \\
+Causality & Attention mask & Light-cone structure \\
+Spacetime coupling & None & Wave packet = spacetime unity \\
+\end{tabular}
+\end{table}
+
+\subsection{Connection to Embodied Cognition}
+
+Our argument aligns with Clark's~\citep{clark1997} embodied cognition thesis: intelligence requires not just computation but physical grounding. A system that cannot represent spacetime cannot be physically grounded, regardless of its parameter count. This is not a claim about consciousness or qualia~\citep{chalmers1996}; it is a claim about \textit{representational capacity}.
+
+\textit{Toward validation}: The current evidence is limited to NLP tasks. However, the LSH project already provides the infrastructure for physical simulation validation: a 3D world engine built on Rust + wgpu with pluggable physics backends (LSH SimplePhysics at 70\% completion, Rapier physics engine integrated, Jolt physics engine planned), path planning with A* search and obstacle detection, and collision simulation. We propose three concrete experiments in Section~\ref{sec:validation} that can definitively test the spacetime cognition deficit hypothesis.
+
+\section{Implication 2: Approximation as the Essence of Intelligence}
+
+\subsection{The Peanut Problem}
+
+\textit{How do you store a complete peanut in a hard drive?}
+
+Three approaches exist:
+
+\begin{enumerate}
+\item \textbf{Rendering}: Complete 3D reconstruction. Information: $\infty$ (continuous space). Conclusion: Impossible to store completely.
+\item \textbf{Function approximation}: Parameterized encoding $(k, w, \omega, \theta)$. Information: finite (discrete parameters). Conclusion: Can approximate, but cannot perfect.
+\item \textbf{Existence detection}: 0/1 judgment. Information: 1 bit. Conclusion: Can do, but loses almost all information.
+\end{enumerate}
+
+This trilemma is not specific to peanuts. It applies to any physical object, any sensory experience, any aspect of reality. The fundamental problem of intelligence is: \textit{how to use finite codes to approximate an infinite world?}
+
+\subsection{The LSH-SFA Answer}
+
+LSH-SFA's wave packet representation corresponds to the function approximation approach. Each token is encoded as a wave packet $(k, w, \omega, \theta)$ --- a finite set of parameters that approximates an infinite spacetime field. Light-cone attention combines existence detection (via decay weighting) with function approximation. The three-layer architecture~\citep{lsh-three-layer} provides a unified framework:
+
+\begin{itemize}
+\item \textbf{Structure layer}: What exists --- objective properties (spectral reflectance $R(\lambda)$)
+\item \textbf{Rule layer}: How it is perceived --- observer-defined transformations (perception function $S(\lambda)$)
+\item \textbf{Execution layer}: What emerges --- computed results (perceived color $= \int R(\lambda) \times I(\lambda) \times S(\lambda) \, d\lambda$)
+\end{itemize}
+
+The color example illustrates a deeper principle: \textit{perception is relational, not attributive}. Color is not a property of the world; it is the result of an observer's interaction with the world. The three-layer architecture formalizes this insight: the same objective reality (Structure) yields different perceived realities (Execution) depending on the observer (Rule).
+
+\subsection{Connection to Information Theory}
+
+The peanut problem connects to Shannon's~\citep{shannon1948} insight that information is the resolution of uncertainty. Existence detection resolves 1 bit of uncertainty. Rendering resolves infinite uncertainty (impossible). Function approximation resolves a finite, useful amount of uncertainty. Intelligence operates in this middle ground: sufficient approximation for effective action, insufficient for perfect reproduction.
+
+This is also the principle behind locality-sensitive hashing (LSH): similar items are mapped to similar hash codes with high probability:
+
+\begin{equation}
+\Pr[h(x) = h(y)] \uparrow \quad \text{as} \quad \text{sim}(x, y) \uparrow
+\end{equation}
+
+LSH-SFA's wave packet representation shares this principle: similar semantic positions produce stronger resonance:
+
+\begin{equation}
+\text{Resonance strength}(k_i, k_j) \uparrow \quad \text{as} \quad \text{sim}(k_i, k_j) \uparrow
+\end{equation}
+
+Both use finite codes to approximate an infinite similarity space. The name LSH is both a tribute to this principle and a reminder that approximation --- not completeness --- is the essence of intelligence.
+
+\section{Implication 3: Architectural Diversity as Ecological Health}
+
+\subsection{The Homogenization Problem}
+
+The current AI landscape exhibits dangerous homogenization:
+
+\begin{itemize}
+\item Nearly all large language models use the Transformer architecture
+\item Training data increasingly overlaps
+\item Evaluation benchmarks converge
+\item Research directions herd toward the same objectives
+\end{itemize}
+
+This is the AI equivalent of agricultural monoculture: highly productive in the short term, catastrophically vulnerable in the long term. A single architectural disease --- a fundamental limitation like the spacetime cognition deficit --- could affect the entire ecosystem simultaneously.
+
+\subsection{Evidence: The Collapse Phenomenon}
+
+The collapse phenomenon~\citep{lsh-encoding-gradient} provides direct evidence of architectural fragility. When trained from scratch on fine-grained classification tasks without pretraining, both LSH-SFA and Transformer baselines collapse to predicting a single class:
+
+\begin{table}[h]
+\centering
+\caption{Collapse phenomenon across architectures and datasets.}
+\label{tab:collapse}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Dataset} & \textbf{Classes} & \textbf{LSH-SFA Acc} & \textbf{Prediction} \\
+\midrule
+SST-2 & 2 & 50.9\% & All positive \\
+SST-5 & 5 & 25.7\% & All positive \\
+AG News & 4 & 27.1\% & All World \\
+\end{tabular}
+\end{table}
+
+Crucially, \textit{both architectures collapse}. This is not an architecture-specific failure; it is a shared vulnerability of fine-grained classification without pretraining. When all architectures share the same vulnerability, the ecosystem is fragile.
+
+\subsection{The Biodiversity Analogy}
+
+In ecology, biodiversity is recognized as fundamental to ecosystem health~\citep{wilson1992}:
+
+\begin{itemize}
+\item Genetic diversity $\rightarrow$ adaptability
+\item Species diversity $\rightarrow$ ecological stability
+\item Ecosystem diversity $\rightarrow$ resilience
+\end{itemize}
+
+We propose an analogous principle for AI:
+
+\begin{table}[h]
+\centering
+\caption{Biodiversity-architecture correspondence.}
+\label{tab:biodiversity}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Biological Diversity} & \textbf{Architectural Diversity} & \textbf{Shared Principle} \\
+\midrule
+Genetic diversity & Element type diversity & Representational capacity \\
+Species diversity & Rule type diversity & Computational capacity \\
+Ecosystem diversity & Backend diversity & Adaptive capacity \\
+\end{tabular}
+\end{table}
+
+\textit{Qualification}: The biodiversity analogy is suggestive but not rigorous. Biological species occupy distinct ecological niches; whether AI architectures occupy analogous ``computational niches'' remains an open question. A stronger version of this argument would demonstrate that different architectures make \textit{different types of errors} on the same task, providing complementary rather than redundant information.
+
+\subsection{Compatibility over Speed}
+
+LSH-SFA makes a deliberate architectural choice: \textit{compatibility over speed}. By unifying semantic representation (wave packets), computation backend (Rust + Burn abstraction), and data format (LSH Format~\citep{lsh-format}), the architecture prioritizes ecological interoperability over task-specific optimization.
+
+\begin{table}[h]
+\centering
+\caption{Speed-first vs.\ compatibility-first design.}
+\label{tab:philosophy}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Dimension} & \textbf{Speed-First} & \textbf{Compatibility-First (LSH-SFA)} \\
+\midrule
+Design goal & Task-optimal & Ecological interoperability \\
+Semantic representation & Task-specific embedding & Unified wave packets \\
+Compute backend & Hardware-bound & Rust + Burn abstraction \\
+Migration cost & Retrain from scratch & Zero-cost switching \\
+Ecological effect & Fragmentation & Unified standard \\
+\end{tabular}
+\end{table}
+
+This choice parallels the Khronos Group's standardization efforts (OpenGL, Vulkan, OpenCL): sacrifice vendor-specific optimizations for ecosystem unity. Whether this tradeoff is justified depends on the value one places on ecological health versus raw performance --- a philosophical choice, not a purely technical one.
+
+\section{Validation Path: Physical Simulation Experiments}
+\label{sec:validation}
+
+The spacetime cognition deficit hypothesis is \textit{falsifiable}. If Transformer architectures with sufficient scale can match LSH-SFA on tasks requiring physical reasoning, the hypothesis is refuted. We propose three experiments using the LSH project's existing infrastructure.
+
+\subsection{Existing Infrastructure}
+
+The LSH project includes a 3D world engine with the following components:
+
+\begin{table}[h]
+\centering
+\caption{Physical simulation infrastructure.}
+\label{tab:infrastructure}
+\begin{tabular}{llc}
+\toprule
+\textbf{Component} & \textbf{Technology} & \textbf{Status} \\
+\midrule
+3D rendering & Rust + wgpu & Operational \\
+Physics engine (lightweight) & LSH SimplePhysics & 70\% \\
+Physics engine (production) & Rapier & Integrated \\
+Physics engine (high-precision) & Jolt & Planned \\
+Path planning & A* + obstacle detection & Operational \\
+Collision simulation & Rapier collision API & Operational \\
+Quadruped robot & Gait algorithm + simulation & In progress \\
+\end{tabular}
+\end{table}
+
+This infrastructure can generate training and evaluation data for physical reasoning tasks without external dependencies.
+
+\subsection{Experiment 1: Physical State Prediction}
+
+\textbf{Task}: Given the physical state at time $t$ (positions, velocities, collision states of $N$ objects), predict the physical state at time $t+1$.
+
+\textbf{Data generation}: Use Rapier physics engine to simulate $N$-body scenarios (bouncing balls, sliding blocks, pendulums). Record state trajectories as training data.
+
+\textbf{Comparison}:
+\begin{itemize}
+\item \textbf{LSH-SFA}: Wave packet $(k, w, \omega, \theta)$ encodes position and velocity intrinsically; PDE evolution models state dynamics; light-cone attention enforces causal propagation.
+\item \textbf{Transformer}: Token embeddings + positional encodings represent state; attention learns dynamics from data.
+\end{itemize}
+
+\textbf{Predicted outcome}: LSH-SFA should outperform Transformer on:
+\begin{itemize}
+\item Long-horizon prediction accuracy (state error at $t+k$ for large $k$)
+\item Generalization to unseen object counts and configurations
+\item Sample efficiency (accuracy vs.\ training data size)
+\end{itemize}
+
+\textbf{Falsification condition}: If Transformer matches LSH-SFA on all metrics with sufficient scale, the spacetime cognition deficit hypothesis is refuted for this task class.
+
+\subsection{Experiment 2: Path Planning Reasoning}
+
+\textbf{Task}: Given a 3D scene with obstacles, a start position, and a goal position, generate a collision-free path.
+
+\textbf{Data generation}: Use A* path planning as ground truth. Generate diverse 3D scenes with varying obstacle densities and configurations.
+
+\textbf{Comparison}:
+\begin{itemize}
+\item \textbf{LSH-SFA}: Light-cone attention naturally encodes spatial distance decay (low-frequency wave packets propagate farther); wave vector $k$ represents spatial position.
+\item \textbf{Transformer}: Must learn spatial relationships from attention patterns alone.
+\end{itemize}
+
+\textbf{Predicted outcome}: LSH-SFA should outperform Transformer on:
+\begin{itemize}
+\item Path optimality (closeness to A* ground truth)
+\item Obstacle avoidance rate
+\item Generalization to scenes with more obstacles than seen during training
+\end{itemize}
+
+\subsection{Experiment 3: Collision Prediction}
+
+\textbf{Task}: Given trajectories of two moving objects, predict whether they will collide and, if so, the collision time.
+
+\textbf{Data generation}: Use collision simulation module to generate trajectory pairs with collision/no-collision labels and collision times.
+
+\textbf{Comparison}:
+\begin{itemize}
+\item \textbf{LSH-SFA}: Causal mode with direction bias ensures temporal ordering; resonance coupling detects trajectory intersections.
+\item \textbf{Transformer}: Must learn temporal causality from attention masks.
+\end{itemize}
+
+\textbf{Predicted outcome}: LSH-SFA should outperform Transformer on:
+\begin{itemize}
+\item Collision detection accuracy
+\item Collision time prediction precision
+\item Robustness to trajectory noise
+\end{itemize}
+
+\subsection{Why These Experiments Matter}
+
+These three experiments test the spacetime cognition deficit at increasing levels of physical reasoning:
+
+\begin{enumerate}
+\item \textbf{Physical state prediction}: Tests whether intrinsic spacetime encoding improves dynamics modeling
+\item \textbf{Path planning}: Tests whether intrinsic spatial representation improves geometric reasoning
+\item \textbf{Collision prediction}: Tests whether intrinsic causality improves temporal reasoning
+\end{enumerate}
+
+Together, they cover the three dimensions of the spacetime cognition deficit: spatial, temporal, and causal. If LSH-SFA consistently outperforms Transformer across all three, the hypothesis gains strong support. If not, the specific failure modes will refine our understanding of where intrinsic spacetime modeling helps and where it does not.
+
+\section{Related Work}
+
+\subsection{Philosophy of Technology}
+
+Winner~\citep{winner1980} argued that artifacts have politics: technical designs can embody and perpetuate specific forms of power and social order. We extend this insight: neural architectures can embody specific assumptions about the nature of reality and intelligence. An architecture that encodes spacetime intrinsically embodies a different worldview than one that treats position as an afterthought.
+
+Feenberg~\citep{feenberg1999} further argued that technology is not neutral but is shaped by the values and interests of its designers. The choice to ground LSH-SFA in physical priors reflects a value judgment: that intelligence should be physically grounded, not merely computationally efficient.
+
+\subsection{Embodied Cognition}
+
+Clark~\citep{clark1997} argued that intelligence requires physical grounding: cognition is not computation on abstract symbols but interaction between an agent and its environment. Our spacetime cognition argument is a specific instance of this general principle: an architecture that cannot represent physical spacetime cannot be physically grounded, regardless of scale.
+
+\subsection{AI Ethics Frameworks}
+
+Existing AI ethics frameworks focus primarily on deployed systems:
+
+\begin{itemize}
+\item \textbf{Asilomar AI Principles}~\citep{asilomar2017}: Safety, transparency, alignment
+\item \textbf{Montreal Declaration}~\citep{montreal2018}: Well-being, autonomy, solidarity
+\item \textbf{EU AI Act}~\citep{euai2021}: Risk-based regulation
+\end{itemize}
+
+These frameworks treat ethics as external constraints on deployed systems. Our approach is different: we examine how \textit{architectural choices} implicitly encode assumptions about the world, and how these assumptions shape what a system can and cannot do. This is not ethics in the conventional sense, but it is a prerequisite for informed ethical deliberation.
+
+\subsection{Philosophy of Mind}
+
+\begin{itemize}
+\item \textbf{Qualia and the Hard Problem}~\citep{chalmers1996}: Subjective experience may be irreducible
+\item \textbf{Chinese Room Argument}~\citep{searle1980}: Syntax vs.\ semantics
+\end{itemize}
+
+Our argument does not depend on claims about consciousness or qualia. The spacetime cognition deficit is a claim about \textit{representational capacity}, not about subjective experience. Whether a system with intrinsic spacetime modeling is ``conscious'' is a separate question from whether it can \textit{represent} physical causation.
+
+\section{Standing on the Shoulders of Giants}
+
+The Transformer architecture~\citep{vaswani2017attention} has laid an indisputable foundation for the age of artificial intelligence. Our critique of its spacetime cognition deficit is not a dismissal. It is an acknowledgment that every foundation has its limits, and building beyond those limits requires new foundations.
+
+LSH-SFA is built upon open source tools: Rust, Burn, PyO3, and countless libraries. The open source community, particularly GitHub, has been instrumental in making AI research accessible. We hope that one day LSH may also contribute back to this ecosystem.
+
+\section{Conclusion}
+
+We have proposed the spacetime cognition deficit hypothesis and presented three lines of evidence:
+
+\begin{enumerate}
+\item \textbf{The spacetime cognition deficit is architectural, not parametric}. LSH-SFA achieves comparable or better performance with fewer parameters and lower perplexity, and more layers can yield worse results. This suggests that the diminishing returns of Scaling Laws may reflect an architectural ceiling.
+
+\item \textbf{Intelligence is approximation}. The peanut problem formalizes the trilemma that any intelligent system must navigate: completeness is impossible, existence detection is insufficient, function approximation is the viable middle ground. Wave packet representation embodies this principle.
+
+\item \textbf{Architectural diversity is a prerequisite, not a luxury}. The collapse phenomenon demonstrates shared vulnerabilities across architectures. The homogenization of the AI landscape toward a single architecture creates ecological fragility.
+\end{enumerate}
+
+Unlike purely philosophical arguments, the spacetime cognition deficit hypothesis is \textit{falsifiable}. We have proposed three concrete experiments --- physical state prediction, path planning reasoning, and collision prediction --- using the LSH project's existing 3D world engine with pluggable physics backends. These experiments test the three dimensions of the deficit: spatial, temporal, and causal.
+
+The foundational question for general embodied intelligence is this: \textit{can an architecture that cannot represent spacetime ever achieve genuine physical understanding?} If the answer is no, then the path to general embodied intelligence requires fundamentally new architectures, not merely larger models --- and LSH-SFA, with its intrinsic spacetime encoding, PDE-driven evolution, light-cone causality, and energy conservation, provides the general-purpose architectural foundation that embodied intelligence requires. If the answer is yes, then we will have learned something important about the nature of physical reasoning and the surprising capabilities of sequence models.
+
+Either way, the question deserves an answer.
+
+\bibliographystyle{plainnat}
+
+\begin{thebibliography}{10}
+
+\bibitem[Asilomar(2017)]{asilomar2017}
+Asilomar AI Principles.
+\newblock \url{https://futureoflife.org/open-letter/ai-principles/}, 2017.
+
+\bibitem[Bostrom(2014)]{bostrom2014}
+Nick Bostrom.
+\newblock \textit{Superintelligence: Paths, Dangers, Strategies}.
+\newblock Oxford University Press, 2014.
+
+\bibitem[Chalmers(1996)]{chalmers1996}
+David J.~Chalmers.
+\newblock \textit{The Conscious Mind: In Search of a Fundamental Theory}.
+\newblock Oxford University Press, 1996.
+
+\bibitem[Clark(1997)]{clark1997}
+Andy Clark.
+\newblock \textit{Being There: Putting Brain, Body, and World Together Again}.
+\newblock MIT Press, 1997.
+
+\bibitem[EU AI Act(2021)]{euai2021}
+European Commission.
+\newblock Proposal for a regulation laying down harmonised rules on artificial intelligence (Artificial Intelligence Act), 2021.
+
+\bibitem[Feenberg(1999)]{feenberg1999}
+Andrew Feenberg.
+\newblock \textit{Questioning Technology}.
+\newblock Routledge, 1999.
+
+\bibitem[Floridi(2011)]{floridi2011}
+Luciano Floridi.
+\newblock \textit{The Philosophy of Information}.
+\newblock Oxford University Press, 2011.
+
+\bibitem[Li(2026a)]{lsh-sfa}
+Hengbo Li.
+\newblock LSH-SFA: Spacetime Field Attention with Wave Packets, Light-Cone Causality, and PDE-Driven Evolution.
+\newblock \emph{LSH Protocol Preprint}, 2026.
+
+\bibitem[Li(2026b)]{lsh-three-layer}
+Hengbo Li.
+\newblock LSH: Element-Observers Semantic Architecture with Emergent Execution.
+\newblock \emph{LSH Protocol Preprint}, 2026.
+
+\bibitem[Li(2026c)]{lsh-attention}
+Hengbo Li.
+\newblock Beyond Softmax: A Systematic Comparison of Eight Linear Attention Mechanisms.
+\newblock \emph{LSH Protocol Preprint}, 2026.
+
+\bibitem[Li(2026d)]{lsh-encoding-gradient}
+Hengbo Li.
+\newblock Encoding and Gradient in Physics-Informed Networks: Tokenizer-Free Models and Controllable Explosion Optimization.
+\newblock \emph{LSH Protocol Preprint}, 2026.
+
+\bibitem[Li(2026e)]{lsh-autoregressive}
+Hengbo Li.
+\newblock LSH-SFA for Autoregressive Generation: Causal Mode and Conversation Ability.
+\newblock \emph{LSH Protocol Preprint}, 2026.
+
+\bibitem[Li(2026f)]{lsh-format}
+Hengbo Li.
+\newblock LSH Format: AI-Native Data Format with Rust/Burn Engineering Validation.
+\newblock \emph{LSH Protocol Preprint}, 2026.
+
+\bibitem[Li(2026g)]{lsh-burn}
+Hengbo Li.
+\newblock LSH-Burn: Rust-based Spacetime Field Architecture Implementation.
+\newblock \emph{LSH Protocol Preprint}, 2026.
+
+\bibitem[Li(2026h)]{lsh-rules}
+Hengbo Li.
+\newblock LSH Rules: Self-Verifying Semantic System for Super Rule Enhancement and Prompt Engineering.
+\newblock \emph{LSH Protocol Preprint}, 2026.
+
+\bibitem[Li(2026i)]{lsh-version-control}
+Hengbo Li.
+\newblock LSH Version Control: Ternary Semantic Versioning Based on Three-Layer Architecture.
+\newblock \emph{LSH Protocol Preprint}, 2026.
+
+\bibitem[Montreal(2018)]{montreal2018}
+Montreal Declaration for Responsible AI Development.
+\newblock \url{https://montrealdeclaration-responsibleai.com/}, 2018.
+
+\bibitem[Press et~al.(2022)]{press2022train}
+Ofir Press, Noah A.~Smith, and Mike Lewis.
+\newblock Train short, test long: Attention with linear biases enables input length extrapolation.
+\newblock In \textit{ICLR}, 2022.
+
+\bibitem[Searle(1980)]{searle1980}
+John R.~Searle.
+\newblock Minds, brains, and programs.
+\newblock \textit{Behavioral and Brain Sciences}, 3(3):417--424, 1980.
+
+\bibitem[Shannon(1948)]{shannon1948}
+Claude E.~Shannon.
+\newblock A mathematical theory of communication.
+\newblock \textit{Bell System Technical Journal}, 27(3):379--423, 1948.
+
+\bibitem[Su et~al.(2024)]{su2024roformer}
+Jianlin Su, Murtadha Ahmed, Yu Lu, Shengfeng Pan, Wen Bo, and Yunfeng Liu.
+\newblock RoFormer: Enhanced transformer with rotary position embedding.
+\newblock \textit{Neurocomputing}, 568:127063, 2024.
+
+\bibitem[Vaswani et~al.(2017)]{vaswani2017attention}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan~N Gomez, {\L}ukasz Kaiser, and Illia Polosukhin.
+\newblock Attention is all you need.
+\newblock In \textit{Advances in Neural Information Processing Systems}, 2017.
+
+\bibitem[Wilson(1992)]{wilson1992}
+Edward O.~Wilson.
+\newblock \textit{The Diversity of Life}.
+\newblock Harvard University Press, 1992.
+
+\bibitem[Winner(1980)]{winner1980}
+Langdon Winner.
+\newblock Do artifacts have politics?
+\newblock \textit{Daedalus}, 109(1):121--136, 1980.
+
+\end{thebibliography}
+
+\end{document}

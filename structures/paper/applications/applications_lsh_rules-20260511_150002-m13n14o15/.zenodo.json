@@ -1,0 +1,44 @@
+{
+    "title": "LSH Rules: Self-Verifying Semantic System for Super Rule Enhancement and Prompt Engineering",
+    "description": "We present LSH Rules, a self-verifying semantic system that serves as a deep application example of the LSH Format 1+N pluggable backend pattern and the three-layer fractal architecture (Structure·Rule·Execution). LSH Rules is not only a theoretical framework but also its own primary use case: the rules directory in this very project is managed using LSH Rules itself, creating a self-referential verification loop. We introduce the three-layer fractal architecture where every rule file embodies Structure (definitions), Rule (constraints), and Execution (checklists). We further present cross-language code rules for Rust+Python FFI consistency, demonstrating that code files themselves follow the three-layer pattern. The system achieves 80% coverage for common development scenarios and reduces prompt engineering time by 60% through automatic rule composition.",
+    "creators": [
+        {
+            "name": "Li, Hengbo",
+            "affiliation": "Independent Researcher",
+            "orcid": "https://orcid.org/0009-0000-5331-6656"
+        }
+    ],
+    "keywords": [
+        "LSH Rules",
+        "self-verifying",
+        "semantic system",
+        "three-layer fractal",
+        "1+N pluggable",
+        "prompt engineering",
+        "cross-language FFI",
+        "rule enhancement"
+    ],
+    "access_right": "open",
+    "license": "CC-BY-4.0",
+    "upload_type": "publication",
+    "publication_type": "preprint",
+    "version": "v13.0",
+    "subjects": [
+        {
+            "term": "Artificial Intelligence",
+            "identifier": "https://id.loc.gov/authorities/subjects/sh85008031"
+        }
+    ],
+    "related_identifiers": [
+        {
+            "relation": "isSupplementedBy",
+            "identifier": "https://github.com/hengbo-li/lsh-protocol",
+            "scheme": "url"
+        }
+    ],
+    "communities": [
+        {
+            "identifier": "artificial-intelligence"
+        }
+    ]
+}

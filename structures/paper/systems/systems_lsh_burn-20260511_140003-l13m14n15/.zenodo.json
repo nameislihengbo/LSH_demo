@@ -1,0 +1,44 @@
+{
+    "title": "LSH-Burn: Rust-based Spacetime Field Architecture Implementation",
+    "description": "We present LSH-Burn, a Rust-based implementation of the LSH-SFA (Spacetime Field Attention) architecture using the Burn deep learning framework. LSH-Burn provides 1+N pluggable backend support for CUDA, Vulkan, AMD ROCm, WGPU, and ndarray backends. Key components include WavePacketProjector for token-to-wave-packet conversion, FieldAttention with Gaussian similarity, ResonanceCoupling for frequency resonance, FieldEvolution with PDE-driven dynamics, and WavePacketDecoder for generation. We achieve 50% memory reduction through NF4/INT8 quantization and gradient checkpointing. Cross-language FFI bindings enable Python (via PyO3) and JavaScript (via wasm-bindgen) integration.",
+    "creators": [
+        {
+            "name": "Li, Hengbo",
+            "affiliation": "Independent Researcher",
+            "orcid": "https://orcid.org/0009-0000-5331-6656"
+        }
+    ],
+    "keywords": [
+        "LSH-SFA",
+        "Rust",
+        "Burn",
+        "deep learning",
+        "spacetime field",
+        "multi-backend",
+        "quantization",
+        "cross-language FFI"
+    ],
+    "access_right": "open",
+    "license": "CC-BY-4.0",
+    "upload_type": "publication",
+    "publication_type": "preprint",
+    "version": "v6.0",
+    "subjects": [
+        {
+            "term": "Artificial Intelligence",
+            "identifier": "https://id.loc.gov/authorities/subjects/sh85008031"
+        }
+    ],
+    "related_identifiers": [
+        {
+            "relation": "isSupplementedBy",
+            "identifier": "https://github.com/hengbo-li/lsh-protocol",
+            "scheme": "url"
+        }
+    ],
+    "communities": [
+        {
+            "identifier": "artificial-intelligence"
+        }
+    ]
+}

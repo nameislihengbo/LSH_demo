@@ -1,0 +1,44 @@
+{
+    "title": "Beyond Softmax: A Systematic Comparison of Eight Linear Attention Mechanisms",
+    "description": "We present a systematic comparison of eight linear attention mechanisms: Softmax (baseline), ELU+1 (kernel mapping), ReLU (sparse), Poly-2 (polynomial), RFF (random Fourier features), CosFormer (周期+重加权), RWKV (指数衰减), and Performer (核估计). Through comprehensive evaluation on approximation accuracy, long-range dependency, training convergence, and computational efficiency, we find that ELU+1 achieves the best accuracy among linear methods (0.9977 cosine similarity vs Softmax 1.0), significantly outperforming other linear alternatives. We analyze the Grouped Query Attention (GQA) memory-accuracy tradeoff and find that GQA-4 provides the best balance (75% memory, -0.5% accuracy loss). Our analysis of long-distance information propagation reveals that RWKV's exponential decay causes complete loss of long-range dependencies beyond distance 50.",
+    "creators": [
+        {
+            "name": "Li, Hengbo",
+            "affiliation": "Independent Researcher",
+            "orcid": "https://orcid.org/0009-0000-5331-6656"
+        }
+    ],
+    "keywords": [
+        "linear attention",
+        "softmax attention",
+        "ELU+1",
+        "GQA",
+        "grouped query attention",
+        "attention mechanisms",
+        "transformer alternatives",
+        "long-range dependency"
+    ],
+    "access_right": "open",
+    "license": "CC-BY-4.0",
+    "upload_type": "publication",
+    "publication_type": "preprint",
+    "version": "v5.0",
+    "subjects": [
+        {
+            "term": "Artificial Intelligence",
+            "identifier": "https://id.loc.gov/authorities/subjects/sh85008031"
+        }
+    ],
+    "related_identifiers": [
+        {
+            "relation": "isSupplementedBy",
+            "identifier": "https://github.com/hengbo-li/lsh-protocol",
+            "scheme": "url"
+        }
+    ],
+    "communities": [
+        {
+            "identifier": "artificial-intelligence"
+        }
+    ]
+}

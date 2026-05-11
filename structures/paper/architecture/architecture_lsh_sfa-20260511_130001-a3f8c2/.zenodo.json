@@ -1,0 +1,46 @@
+{
+    "title": "LSH-SFA: Spacetime Field Attention with Wave Packets, Light-Cone Causality, and PDE-Driven Evolution",
+    "description": "We present LSH-SFA (Spacetime Field Attention), a novel neural architecture that replaces the core mechanisms of Transformer with physically grounded alternatives. Instead of QKV dot-product attention, LSH-SFA represents each token as a wave packet (k, w, ω, θ) encoding semantic position, content, frequency, and phase, and computes attention via Gaussian similarity in O(n) linear time. Instead of hard causal masking, it introduces a light-cone mechanism with frequency-adaptive decay. Instead of feed-forward networks, it employs PDE-driven field evolution: a diffusion equation for bidirectional tasks and a convection equation for causal generation. On AG News text classification, a 2-layer LSH-SFA with 1.02M parameters achieves 91.80% accuracy, matching a 4-layer Transformer baseline while using 14% fewer parameters. On WikiText-2 language modeling, LSH-SFA achieves perplexity of 654 vs. the Transformer's 1069 (39% lower), with no overfitting observed.",
+    "creators": [
+        {
+            "name": "Li, Hengbo",
+            "affiliation": "Independent Researcher",
+            "orcid": "https://orcid.org/0009-0000-5331-6656"
+        }
+    ],
+    "keywords": [
+        "spacetime field attention",
+        "PDE-driven neural network",
+        "wave packet",
+        "light-cone attention",
+        "field evolution",
+        "transformer alternative",
+        "linear attention",
+        "physics-informed neural network",
+        "diffusion equation",
+        "convection equation"
+    ],
+    "access_right": "open",
+    "license": "CC-BY-4.0",
+    "upload_type": "publication",
+    "publication_type": "preprint",
+    "version": "v1.0",
+    "subjects": [
+        {
+            "term": "Artificial Intelligence",
+            "identifier": "https://id.loc.gov/authorities/subjects/sh85008031"
+        }
+    ],
+    "related_identifiers": [
+        {
+            "relation": "isSupplementedBy",
+            "identifier": "https://github.com/hengbo-li/lsh-protocol",
+            "scheme": "url"
+        }
+    ],
+    "communities": [
+        {
+            "identifier": "artificial-intelligence"
+        }
+    ]
+}

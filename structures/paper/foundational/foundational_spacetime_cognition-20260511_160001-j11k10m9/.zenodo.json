@@ -1,0 +1,53 @@
+{
+    "title": "The Spacetime Cognition Deficit: Why Architecture Matters for General Embodied Intelligence",
+    "description": "We propose the spacetime cognition deficit hypothesis: conventional Transformer architectures are structurally limited in achieving general embodied intelligence because they lack intrinsic spacetime modeling capability, and this limitation is architectural rather than parametric. We present three lines of evidence from the LSH-SFA series and outline a concrete validation path using the LSH project's existing 3D world engine with pluggable physics backends, proposing three experiments that can definitively test the hypothesis. LSH-SFA, with its intrinsic spacetime encoding, PDE-driven evolution, light-cone causality, and energy conservation, provides the general-purpose architectural foundation that embodied intelligence requires.",
+    "creators": [
+        {
+            "name": "Li, Hengbo",
+            "affiliation": "Independent Researcher",
+            "orcid": "https://orcid.org/0009-0000-5331-6656"
+        }
+    ],
+    "keywords": [
+        "spacetime cognition deficit",
+        "general embodied intelligence",
+        "Transformer limitations",
+        "physical priors",
+        "wave packet representation",
+        "LSH-SFA",
+        "architectural diversity",
+        "physical simulation",
+        "embodied cognition",
+        "general-purpose foundation"
+    ],
+    "access_right": "open",
+    "license": "CC-BY-4.0",
+    "upload_type": "publication",
+    "publication_type": "preprint",
+    "version": "v10.1",
+    "subjects": [
+        {
+            "term": "Artificial Intelligence",
+            "identifier": "https://id.loc.gov/authorities/subjects/sh85008031"
+        },
+        {
+            "term": "Robotics",
+            "identifier": "https://id.loc.gov/authorities/subjects/sh85115203"
+        }
+    ],
+    "related_identifiers": [
+        {
+            "relation": "isSupplementedBy",
+            "identifier": "https://github.com/hengbo-li/lsh-protocol",
+            "scheme": "url"
+        }
+    ],
+    "communities": [
+        {
+            "identifier": "artificial-intelligence"
+        },
+        {
+            "identifier": "robotics"
+        }
+    ]
+}
