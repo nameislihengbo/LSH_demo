@@ -208,16 +208,16 @@ Each paper has an independent Release, continuously iterating in the same GitHub
 
 ```
 GitHub: lsh-workspace/lsh-protocol
-├── v1.0  →  LSH-SFA Architecture (DOI1)
-├── v2.0  →  Three-Layer Architecture (DOI2)
-├── v3.0  →  LSH Format (DOI3)
-├── v4.0  →  Attention Comparison (DOI4)
-├── v5.0  →  Encoding & Gradient (DOI5)
-├── v6.0  →  Autoregressive Generation (DOI6)
-├── v7.0  →  Spacetime Cognition Deficit (DOI7)
-├── v8.0  →  LSH-Burn Implementation (DOI8)
-├── v9.0  →  LSH Rules Self-Verification (DOI9)
-└── v10.0 →  Ternary Semantic Versioning (DOI10)
+├── v1.0  →  LSH-SFA Architecture (doi:10.5281/zenodo.20129047)
+├── v2.0  →  Three-Layer Architecture (doi:10.5281/zenodo.20129051)
+├── v3.0  →  LSH Format (doi:10.5281/zenodo.20129053)
+├── v4.0  →  Attention Comparison (doi:10.5281/zenodo.20129055)
+├── v5.0  →  Encoding & Gradient (doi:10.5281/zenodo.20129061)
+├── v6.0  →  Autoregressive Generation (doi:10.5281/zenodo.20129063)
+├── v7.0  →  Spacetime Cognition Deficit (doi:10.5281/zenodo.20129066)
+├── v8.0  →  LSH-Burn Implementation (doi:10.5281/zenodo.20129068)
+├── v9.0  →  LSH Rules Self-Verification (doi:10.5281/zenodo.20129070)
+└── v10.0 →  Ternary Semantic Versioning (doi:10.5281/zenodo.20129074)
 ```
 
 ### 3.2 Publication Checklist
@@ -376,7 +376,7 @@ The three-layer architecture (Structure → Rule → Execution) in each paper:
 ### 7.1 Paper Template Structure
 
 ```latex
-\documentclass{article}
+\documentclass[conference]{IEEEtran}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -385,24 +385,19 @@ The three-layer architecture (Structure → Rule → Execution) in each paper:
 \usepackage{booktabs}
 \usepackage{hyperref}
 \usepackage{xcolor}
-\usepackage{geometry}
-\usepackage{natbib}
 \usepackage{tikz}
-
-\geometry{margin=1in}
 
 % LSH Shared symbols
 \input{../common/definitions/lsh-core.tex}
 \input{../common/definitions/math-notation.tex}
-\input{../common/definitions/physics-terms.tex}
 
 \begin{document}
 
 \title{Paper Title}
-\author{Hengbo Li\\
-\texttt{1147502779@qq.com}
+\author{
+  \IEEEauthorblockN{Hengbo Li}
+  \IEEEauthorblockA{LSH Protocol\\1147502779@qq.com}
 }
-\date{May 2026}
 
 \maketitle
 
@@ -410,10 +405,23 @@ The three-layer architecture (Structure → Rule → Execution) in each paper:
 ...
 \end{abstract}
 
+\begin{IEEEkeywords}
+keyword1, keyword2, keyword3
+\end{IEEEkeywords}
+
 \section{Introduction}
 ...
 
-\bibliographystyle{plainnat}
+% Required validation sections (per structure_validation rules)
+\section{Ablation Study}
+...
+\section{Experimental Configuration}
+\subsection{Controlled Variables}
+...
+\section{Reproducibility}
+...
+
+\bibliographystyle{IEEEtran}
 
 \begin{thebibliography}{10}
 ...
